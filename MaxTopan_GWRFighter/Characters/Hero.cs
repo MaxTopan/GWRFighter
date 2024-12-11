@@ -23,7 +23,7 @@ namespace MaxTopan_GWRFighter.Characters
             EquippedWeapon = weapon;
             Console.WriteLine($"{Name} equipped the {weapon.Name}.");
         }
-        
+
         public void Attack(ICharacter villain)
         {
             if (EquippedWeapon == null)

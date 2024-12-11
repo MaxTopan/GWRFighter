@@ -13,7 +13,7 @@ namespace MaxTopan_GWRFighter.Models
     public abstract class RandomChanceWeapon : IWeapon, IRandomChance
     {
         public abstract string Name { get; }
-        public abstract int Damage { get; }
+        public abstract int DamageAmount { get; }
         /// <summary>
         /// Percentage chance for ChanceTrigger() to trigger (0.01 - 0.99)
         /// </summary>

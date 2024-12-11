@@ -15,13 +15,13 @@ namespace MaxTopan_GWRFighter.Models
     {
         public override string Name => "Bow";
 
-        public override int Damage => 5;
+        public override int DamageAmount => 5;
 
         public override double Percentage => 0.2;
 
         public override void Use(ICharacter hero, ICharacter villain)
         {
-            int damage = Damage;
+            int damage = DamageAmount;
             if (ChanceTrigger())
             {
                 damage *= 4;
@@ -30,7 +30,7 @@ namespace MaxTopan_GWRFighter.Models
             villain.Damage(damage);
 
             /* MOVE THIS TO SOMETHING THAT OWNS DIALGOUE DUE TO SRP */
-            Console.WriteLine($"{hero.Name} slashes with the {Name} for {Damage} damage!");
+            Console.WriteLine($"{hero.Name} slashes with the {Name} for {DamageAmount} damage!");
         }
     }
 }
