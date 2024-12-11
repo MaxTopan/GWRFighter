@@ -1,0 +1,14 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MaxTopan_GWRFighter.Models
+{
+    public interface IRandomChance
+    {
+        double Percentage { get; }
+        bool ChanceTrigger();
+    }
+}

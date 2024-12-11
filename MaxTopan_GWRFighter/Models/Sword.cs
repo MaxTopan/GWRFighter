@@ -15,6 +15,8 @@ namespace MaxTopan_GWRFighter.Models
         public void Use(Hero hero, Villain villain)
         {
             villain.Health -= Damage;
+
+            /* MOVE THIS TO SOMETHING THAT OWNS DIALGOUE DUE TO SRP */
             Console.WriteLine($"{hero.Name} slashes with the {Name} for {Damage} damage!");
         }
     }
