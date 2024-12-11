@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MaxTopan_GWRFighter.Utilities
+namespace MaxTopan_GWRFighter.Utilities.Menus
 {
     internal class MenuFactory
     {
@@ -36,7 +36,7 @@ WELCOME TO GWR FIGHTER
             return new Menu
             (
                 @"What will you do?",
-                new string[] { "Attack", "Equip Weapon", "Check Weapon Details", "Exit Game"},
+                new string[] { "Attack", "Equip Weapon", "Check Weapon Details", "Exit Game" },
                 new Dictionary<int, Action>
                 {
                     { 1, () => _gameManager.Attack() },

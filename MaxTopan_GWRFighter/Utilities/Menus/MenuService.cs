@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MaxTopan_GWRFighter.Utilities
+namespace MaxTopan_GWRFighter.Utilities.Menus
 {
     /// <summary>
     /// Contains methods for UI displays

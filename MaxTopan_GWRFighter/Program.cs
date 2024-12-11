@@ -1,5 +1,6 @@
 ﻿using MaxTopan_GWRFighter.Characters;
 using MaxTopan_GWRFighter.Utilities;
+using MaxTopan_GWRFighter.Utilities.Menus;
 
 namespace MaxTopan_GWRFighter
 {

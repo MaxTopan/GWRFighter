@@ -5,14 +5,14 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MaxTopan_GWRFighter.Utilities
+namespace MaxTopan_GWRFighter.Utilities.Menus
 {
     public class Menu
     {
         string Header { get; }
         string[] Choices { get; }
         Dictionary<int, Action> Results { get; }
-        
+
         public Menu(string header, string[] choices, Dictionary<int, Action> results)
         {
             Header = header;
@@ -29,8 +29,8 @@ namespace MaxTopan_GWRFighter.Utilities
             int choice = GetChoice();
             InvokeResult(choice);
         }
-        
-        public void DisplayChoices() 
+
+        public void DisplayChoices()
         {
             Console.WriteLine(Header);
             for (int i = 0; i < Choices.Length; i++)
@@ -56,7 +56,7 @@ namespace MaxTopan_GWRFighter.Utilities
 
         public void InvokeResult(int choice)
         {
-            if (!Results.ContainsKey(choice)) 
+            if (!Results.ContainsKey(choice))
             {
                 throw new Exception("Attempted to invoke invalid choice.");
             }
