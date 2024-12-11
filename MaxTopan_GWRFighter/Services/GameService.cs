@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace MaxTopan_GWRFighter.Services
 {
+    /// <summary>
+    /// Contains methods for the running of the game logic
+    /// </summary>
     internal class GameService
     {
         /// <summary>
