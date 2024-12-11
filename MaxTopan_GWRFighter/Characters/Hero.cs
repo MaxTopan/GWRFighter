@@ -12,7 +12,7 @@ namespace MaxTopan_GWRFighter.Characters
     {
         public string Name { get; }
         public int Health { get; private set; } = 100;
-        private IWeapon EquippedWeapon { get; set; }
+        public IWeapon EquippedWeapon { get; private set; }
         public Hero(string name)
         {
             Name = name;
