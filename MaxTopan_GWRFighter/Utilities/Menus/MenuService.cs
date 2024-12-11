@@ -1,4 +1,5 @@
 ﻿using MaxTopan_GWRFighter.Characters;
+using MaxTopan_GWRFighter.Characters.Villains;
 using System;
 using System.Collections.Generic;
 using System.Linq;

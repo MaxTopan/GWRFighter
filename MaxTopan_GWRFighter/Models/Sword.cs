@@ -13,7 +13,7 @@ namespace MaxTopan_GWRFighter.Models
         public string Name => "Sword";
         public int DamageAmount => 10;
         
-        public void Use(ICharacter hero, ICharacter villain)
+        public void Use(Character hero, Character villain)
         {
             villain.Damage(DamageAmount);
 

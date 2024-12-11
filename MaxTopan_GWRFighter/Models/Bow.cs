@@ -19,7 +19,7 @@ namespace MaxTopan_GWRFighter.Models
 
         public override double Percentage => 0.2;
 
-        public override void Use(ICharacter hero, ICharacter villain)
+        public override void Use(Character hero, Character villain)
         {
             int damage = DamageAmount;
             if (ChanceTrigger())

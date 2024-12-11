@@ -12,6 +12,6 @@ namespace MaxTopan_GWRFighter.Models
     {
         string Name { get; }
         int DamageAmount { get; }
-        void Use(ICharacter hero, ICharacter villain);
+        void Use(Character hero, Character villain);
     }
 }

@@ -17,7 +17,7 @@ namespace MaxTopan_GWRFighter.Models
 
         public int HealAmount => 15;
 
-        public override void Use(ICharacter hero, ICharacter villain)
+        public override void Use(Character hero, Character villain)
         {
             if (ChanceTrigger())
             {
@@ -29,7 +29,7 @@ namespace MaxTopan_GWRFighter.Models
             villain.Damage(DamageAmount);
 
             /* MOVE THIS TO SOMETHING THAT OWNS DIALGOUE DUE TO SRP */
-            Console.WriteLine($"{hero.Name} slashes with the {Name} for {DamageAmount} damage!");
+            Console.WriteLine($"{hero.Name} waves the {Name} for {DamageAmount} damage!");
         }
     }
 }

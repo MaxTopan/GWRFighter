@@ -8,10 +8,10 @@ using static MaxTopan_GWRFighter.Program;
 
 namespace MaxTopan_GWRFighter.Characters
 {
-    public class Hero : ICharacter
+    public class Hero : Character
     {
-        public string Name { get; set; }
-        public int Health { get; set; } = 100;
+        public override string Name { get; }
+        public override int Health { get; protected set; } = 100;
         public IWeapon? EquippedWeapon { get; private set; }
 
         public Hero(string name)
@@ -26,7 +26,7 @@ namespace MaxTopan_GWRFighter.Characters
             Console.WriteLine($"{Name} equipped the {weapon.Name}.");
         }
 
-        public void Attack(ICharacter villain)
+        public override void Attack(Character villain)
         {
             if (EquippedWeapon == null)
             {

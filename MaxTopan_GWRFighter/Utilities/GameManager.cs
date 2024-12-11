@@ -1,4 +1,5 @@
 ﻿using MaxTopan_GWRFighter.Characters;
+using MaxTopan_GWRFighter.Characters.Villains;
 using MaxTopan_GWRFighter.Models;
 using MaxTopan_GWRFighter.Utilities.Menus;
 using System;
