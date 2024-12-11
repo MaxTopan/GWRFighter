@@ -21,8 +21,8 @@ namespace MaxTopan_GWRFighter.Models
         {
             if (ChanceTrigger())
             {
-                /* CHANGE THIS IMPLEMENTATION TO BE VIA A METHOD */
                 hero.Heal(HealAmount);
+                /* MOVE THIS TO SOMETHING THAT OWNS DIALGOUE DUE TO SRP */
                 Console.WriteLine($"{hero.Name} gets healed for {HealAmount}");
             }
 
