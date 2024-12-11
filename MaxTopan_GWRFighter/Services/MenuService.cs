@@ -14,7 +14,7 @@ namespace MaxTopan_GWRFighter.Services
     {
         public void DisplayHeroStats(Hero hero)
         {
-            Console.WriteLine($"{hero.Name} [Health: {hero.Health}, Equipped: {hero.EquippedWeapon.Name}]");
+            Console.WriteLine($"{hero.Name} [Health: {hero.Health}, Equipped: {(hero.EquippedWeapon == null ? "Nothing" : hero.EquippedWeapon.Name)}]");
         }
 
         public void DisplayVillainStats(Villain villain)

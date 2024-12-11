@@ -10,12 +10,14 @@ namespace MaxTopan_GWRFighter.Characters
 {
     public class Hero : ICharacter
     {
-        public string Name { get; }
-        public int Health { get; private set; } = 100;
-        public IWeapon EquippedWeapon { get; private set; }
+        public string Name { get; set; }
+        public int Health { get; set; } = 100;
+        public IWeapon? EquippedWeapon { get; private set; }
+
         public Hero(string name)
         {
             Name = name;
+            EquippedWeapon = null;
         }
 
         public void EquipWeapon(IWeapon weapon)
@@ -32,22 +34,6 @@ namespace MaxTopan_GWRFighter.Characters
                 return;
             }
             EquippedWeapon.Use(this, villain);
-        }
-
-        /// <summary>
-        /// Add health to the Hero
-        /// </summary>
-        public void Heal(int value)
-        {
-            Health += value;
-        }
-
-        /// <summary>
-        /// Remove health from the Hero
-        /// </summary>
-        public void Damage(int value)
-        {
-            Health -= value;
         }
     }
 }
