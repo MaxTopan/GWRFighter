@@ -9,6 +9,10 @@ namespace MaxTopan_GWRFighter.Services
 {
     internal class GameService
     {
+        /// <summary>
+        /// Gets a name from the user and creates a hero with that name
+        /// </summary>
+        /// <returns>A Hero object with the given name</returns>
         public Hero CreateHero()
         {
             string? name = null;
@@ -21,7 +25,12 @@ namespace MaxTopan_GWRFighter.Services
             return new Hero(name);
         }
 
-        public int GetMenuChoice(int maxChoice)
+        /// <summary>
+        /// Gets and validates an int from the user
+        /// </summary>
+        /// <param name="maxChoice">The highest int in the choice range, inclusive</param>
+        /// <returns>The validated chosen int</returns>
+        public int GetChoice(int maxChoice)
         {
             int choice;
             do
