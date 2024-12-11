@@ -8,14 +8,11 @@ namespace MaxTopan_GWRFighter.Characters
 {
     public abstract class Villain : ICharacter
     {
-        public string Name { get; set; }
-        public string Description { get; set; }
+        public abstract string Name { get; set; }
+        public abstract string Description { get; set; }
         public int Health { get; set; } = 50;
         public int AttackPower { get; set; } = 10;
-        public Villain(string name)
-        {
-            Name = name;
-        }
+        public abstract void TakeTurn();
         public void Attack(ICharacter hero)
         {
             hero.Damage(AttackPower);
