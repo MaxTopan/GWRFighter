@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MaxTopan_GWRFighter.Characters;
+using MaxTopan_GWRFighter.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,7 +17,7 @@ namespace MaxTopan_GWRFighter.Utilities.Menus
             _gameManager = gameManager;
         }
 
-        public Menu CreateMainMenu()
+        public Menu MainMenu()
         {
             return new Menu
             (
@@ -35,26 +37,39 @@ WELCOME TO GWR FIGHTER
         {
             return new Menu
             (
-                @"What will you do?",
-                new string[] { "Attack", "Equip Weapon", "Check Weapon Details", "Exit Game" },
+                "What will you do?",
+                new string[] { "Attack", "Equip Weapon", "Exit Game" },
                 new Dictionary<int, Action>
                 {
                     { 1, () => _gameManager.Attack() },
                     { 2, () => _gameManager.EquipWeapon() },
-                    { 3, () => _gameManager.CheckWeaponDetails()},
-                    { 4, () => _gameManager.CloseGame() }
+                    { 3, () => { Console.WriteLine("Quitting to main menu.\r\nPress enter to continue..."); Console.ReadLine(); _gameManager.CloseGame(); } }
                 }
             );
         }
 
-        //public Menu CreateEquipMenu()
-        //{
-        //    // show a list of items to equip
-        //}
+        /// <summary>
+        /// Dynamically generates a list of all weapons, allowing the user to select and equip one
+        /// </summary>
+        /// <returns></returns>
+        public Menu EquipmentMenu()
+        {
+            List<IWeapon> weapons = _gameManager.Weapons;
 
-        //public Menu CreateWeaponDetailsMenu()
-        //{
-        //    // show weapons + descriptions
-        //}
+            string[] weaponNames = weapons.Select(w => w.Name).ToArray();
+            Dictionary<int, Action> choices = new Dictionary<int, Action>();
+
+            for (int i = 0; i < weapons.Count; i++)
+            {
+                choices.Add(i + 1, () => _gameManager.hero.EquipWeapon(weapons[i]));
+            }
+
+            return new Menu
+            (
+                "Which item would you like to equip?",
+                weaponNames,
+                choices
+            );
+        }
     }
 }

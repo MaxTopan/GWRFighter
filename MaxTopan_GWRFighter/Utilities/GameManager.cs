@@ -1,4 +1,5 @@
 ﻿using MaxTopan_GWRFighter.Characters;
+using MaxTopan_GWRFighter.Models;
 using MaxTopan_GWRFighter.Utilities.Menus;
 using System;
 using System.Collections.Generic;
@@ -13,8 +14,15 @@ namespace MaxTopan_GWRFighter.Utilities
     /// </summary>
     internal class GameManager
     {
-        public Hero hero;
-        public Villain villain;
+        public Hero hero { get; private set; }
+        public Villain villain { get; private set; }
+        public List<IWeapon> Weapons { get; private set; }
+
+        public GameManager() 
+        {
+            WeaponHelper weaponHelper = new WeaponHelper();
+            Weapons = weaponHelper.GetAllWeapons();
+        }
 
         /// <summary>
         /// Opens a menu and awaits a choice to execute
@@ -39,8 +47,8 @@ namespace MaxTopan_GWRFighter.Utilities
                 Console.Write("Please enter a name for your hero: ");
                 name = Console.ReadLine();
             }
-
-            return new Hero(name);
+            hero = new Hero(name);
+            return hero;
         }
 
         public Villain CreateVillain()
@@ -73,11 +81,6 @@ namespace MaxTopan_GWRFighter.Utilities
         }
 
         internal void EquipWeapon()
-        {
-            throw new NotImplementedException();
-        }
-
-        internal void CheckWeaponDetails()
         {
             throw new NotImplementedException();
         }

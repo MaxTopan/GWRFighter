@@ -11,7 +11,7 @@ namespace MaxTopan_GWRFighter
             GameManager gameManager = new GameManager();
             MenuFactory menuFactory = new MenuFactory(gameManager);
 
-            Menu mainMenu = menuFactory.CreateMainMenu();
+            Menu mainMenu = menuFactory.MainMenu();
 
             mainMenu.Use();
 

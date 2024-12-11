@@ -10,12 +10,18 @@ namespace MaxTopan_GWRFighter.Utilities
 {
     public class WeaponHelper
     {
-        public static List<Type> GetAllWeapons()
+        private List<IWeapon>? weapons;
+        public List<IWeapon> GetAllWeapons()
         {
-            return Assembly.GetExecutingAssembly()
-                .GetTypes()
-                .Where(t => typeof(IWeapon).IsAssignableFrom(t) && t.IsClass && !t.IsAbstract)
-                .ToList();
+            if (weapons == null)
+            {
+                weapons = Assembly.GetExecutingAssembly()
+                    .GetTypes()
+                    .Where(t => typeof(IWeapon).IsAssignableFrom(t) && t.IsClass && !t.IsAbstract)
+                    .Select(t => Activator.CreateInstance(t) as IWeapon)
+                    .ToList();
+            }
+            return weapons;
         }
     }
 }
