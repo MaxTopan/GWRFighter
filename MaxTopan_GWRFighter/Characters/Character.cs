@@ -33,5 +33,7 @@ namespace MaxTopan_GWRFighter.Characters
         /// </summary>
         /// <param name="character">Character to attack</param>
         public abstract void Attack(Character character);
+
+        public abstract void DisplayStats();
     }
 }

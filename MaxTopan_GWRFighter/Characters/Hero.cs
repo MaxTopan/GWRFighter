@@ -35,5 +35,10 @@ namespace MaxTopan_GWRFighter.Characters
             }
             EquippedWeapon.Use(this, villain);
         }
+
+        public override void DisplayStats()
+        {
+            Console.WriteLine($"{Name} [Health: {Health}, Weapon: {(EquippedWeapon == null ? "Nothing Equipped" : EquippedWeapon.Name)}]");
+        }
     }
 }

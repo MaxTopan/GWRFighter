@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,16 +11,27 @@ namespace MaxTopan_GWRFighter.Characters.Villains
     {
         public override string Name => "Orc";
 
-        public override string Description => "Big. Two tusks. Has thick armour like skin.";
+        public override string Description => "Has thick armour-like skin but can get worn down.";
 
         public override int Health { get; protected set; } = 40;
 
         public override int AttackPower { get; protected set; } = 15;
 
+        private int _armourValue = 4;
+
         public override void Damage(int value)
         {
-            // reduce damage by 2 due to thick skin
-            base.Damage(value - 2);
+            // reduce damage due to thick skin
+            base.Damage(value - _armourValue);
+            if (_armourValue > 0)
+            {
+                _armourValue--;
+            }
+        }
+
+        public override void DisplayStats()
+        {
+            Console.WriteLine($"{Name} [Health: {Health}, Attack Power: {AttackPower}, Armour: {_armourValue}]\r\nDescription: {Description}");
         }
     }
 }

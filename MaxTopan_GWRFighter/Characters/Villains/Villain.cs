@@ -23,5 +23,10 @@ namespace MaxTopan_GWRFighter.Characters.Villains
             /* TODO: MOVE TO SOMETHING THAT OWNS DIALOGUE DUE TO SRP */
             Console.WriteLine($"{Name} attacks {hero.Name} for {AttackPower} damage!");
         }
+
+        public override void DisplayStats()
+        {
+            Console.WriteLine($"{Name} [Health: {Health}, Attack Power: {AttackPower}]\r\nDescription: {Description}");
+        }
     }
 }
