@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MaxTopan_GWRFighter.Services
+namespace MaxTopan_GWRFighter.Utilities
 {
     /// <summary>
     /// Contains methods for UI displays
@@ -19,7 +19,7 @@ namespace MaxTopan_GWRFighter.Services
 
         public void DisplayVillainStats(Villain villain)
         {
-            Console.WriteLine($"{villain.Name} [Health: {villain.Health}, Attack Power: {villain.AttackPower}]");
+            Console.WriteLine($"{villain.Name} [Health: {villain.Health}, Attack Power: {villain.AttackPower}]\r\nDescription: {villain.Description}");
         }
     }
 }

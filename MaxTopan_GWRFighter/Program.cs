@@ -1,5 +1,5 @@
 ﻿using MaxTopan_GWRFighter.Characters;
-using MaxTopan_GWRFighter.Services;
+using MaxTopan_GWRFighter.Utilities;
 
 namespace MaxTopan_GWRFighter
 {
@@ -7,17 +7,14 @@ namespace MaxTopan_GWRFighter
     {
         static void Main(string[] args)
         {
-            GameService gs = new GameService();
+            GameManager gameManager = new GameManager();
+            MenuFactory menuFactory = new MenuFactory(gameManager);
 
-            Console.WriteLine(
-                @"========================================
-WELCOME TO GUINNESS WORLD RECORD FIGHTER
-========================================
-");
-            
-            Hero hero = gs.CreateHero();
-            
-            Console.WriteLine($"Okay, {hero.Name}. What do you want to do?");
+            Menu mainMenu = menuFactory.CreateMainMenu();
+
+            mainMenu.Use();
+
+            Hero hero = gameManager.CreateHero();
 
             Console.ReadLine();
         }
