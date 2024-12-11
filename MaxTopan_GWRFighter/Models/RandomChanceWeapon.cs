@@ -18,7 +18,7 @@ namespace MaxTopan_GWRFighter.Models
         /// Percentage chance for ChanceTrigger() to trigger (0.01 - 0.99)
         /// </summary>
         public abstract double Percentage { get; }
-        public abstract void Use(Hero hero, Villain villain);
+        public abstract void Use(ICharacter hero, ICharacter villain);
         public bool ChanceTrigger()
         {
             Random r = new Random();

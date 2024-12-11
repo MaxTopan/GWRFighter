@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MaxTopan_GWRFighter.Characters
 {
-    public class Villain
+    public abstract class Villain : ICharacter
     {
         public string Name { get; set; }
         public int Health { get; set; } = 50;
@@ -15,10 +15,22 @@ namespace MaxTopan_GWRFighter.Characters
         {
             Name = name;
         }
-        public void Attack(Hero hero)
+        public void Attack(ICharacter hero)
         {
-            hero.Health -= AttackPower;
+            hero.Damage(AttackPower);
+
+            /* TODO: MOVE TO SOMETHING THAT OWNS DIALOGUE DUE TO SRP */
             Console.WriteLine($"{Name} attacks {hero.Name} for {AttackPower} damage!");
+        }
+
+        public void Heal(int value)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Damage(int value)
+        {
+            throw new NotImplementedException();
         }
     }
 }

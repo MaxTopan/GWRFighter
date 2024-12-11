@@ -8,21 +8,23 @@ using static MaxTopan_GWRFighter.Program;
 
 namespace MaxTopan_GWRFighter.Characters
 {
-    public class Hero
+    public class Hero : ICharacter
     {
-        public string Name { get; set; }
-        public int Health { get; set; } = 100;
+        public string Name { get; }
+        public int Health { get; private set; } = 100;
         private IWeapon EquippedWeapon { get; set; }
         public Hero(string name)
         {
             Name = name;
         }
+
         public void EquipWeapon(IWeapon weapon)
         {
             EquippedWeapon = weapon;
             Console.WriteLine($"{Name} equipped the {weapon.Name}.");
         }
-        public void Attack(Villain villain)
+        
+        public void Attack(ICharacter villain)
         {
             if (EquippedWeapon == null)
             {
@@ -30,6 +32,22 @@ namespace MaxTopan_GWRFighter.Characters
                 return;
             }
             EquippedWeapon.Use(this, villain);
+        }
+
+        /// <summary>
+        /// Add health to the Hero
+        /// </summary>
+        public void Heal(int value)
+        {
+            Health += value;
+        }
+
+        /// <summary>
+        /// Remove health from the Hero
+        /// </summary>
+        public void Damage(int value)
+        {
+            Health -= value;
         }
     }
 }

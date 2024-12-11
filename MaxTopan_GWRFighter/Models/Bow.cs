@@ -19,7 +19,7 @@ namespace MaxTopan_GWRFighter.Models
 
         public override double Percentage => 0.2;
 
-        public override void Use(Hero hero, Villain villain)
+        public override void Use(ICharacter hero, ICharacter villain)
         {
             int damage = Damage;
             if (ChanceTrigger())
@@ -27,7 +27,7 @@ namespace MaxTopan_GWRFighter.Models
                 damage *= 4;
             }
 
-            villain.Health -= damage;
+            villain.Damage(damage);
 
             /* MOVE THIS TO SOMETHING THAT OWNS DIALGOUE DUE TO SRP */
             Console.WriteLine($"{hero.Name} slashes with the {Name} for {Damage} damage!");

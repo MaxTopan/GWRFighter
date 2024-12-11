@@ -17,13 +17,13 @@ namespace MaxTopan_GWRFighter.Models
 
         public int HealAmount => 15;
 
-        public override void Use(Hero hero, Villain villain)
+        public override void Use(ICharacter hero, ICharacter villain)
         {
             int damage = Damage;
             if (ChanceTrigger())
             {
                 /* CHANGE THIS IMPLEMENTATION TO BE VIA A METHOD */
-                hero.Health += HealAmount;
+                hero.Heal(HealAmount);
                 Console.WriteLine($"{hero.Name} gets healed for {HealAmount}");
             }
 

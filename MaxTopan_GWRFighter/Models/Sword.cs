@@ -12,9 +12,10 @@ namespace MaxTopan_GWRFighter.Models
     {
         public string Name => "Sword";
         public int Damage => 10;
-        public void Use(Hero hero, Villain villain)
+        
+        public void Use(ICharacter hero, ICharacter villain)
         {
-            villain.Health -= Damage;
+            villain.Damage(Damage);
 
             /* MOVE THIS TO SOMETHING THAT OWNS DIALGOUE DUE TO SRP */
             Console.WriteLine($"{hero.Name} slashes with the {Name} for {Damage} damage!");
