@@ -94,14 +94,15 @@ namespace MaxTopan_GWRFighter.Utilities
             Environment.Exit(0);
         }
 
-        internal void Attack()
+        internal void EquipWeapon()
         {
             throw new NotImplementedException();
         }
 
-        internal void EquipWeapon()
+        internal void Attack()
         {
-            throw new NotImplementedException();
+            hero.Attack(villain);
+            villain.TakeTurn(hero);
         }
     }
 }

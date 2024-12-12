@@ -1,4 +1,5 @@
 ﻿using MaxTopan_GWRFighter.Models;
+using System.Linq;
 
 namespace MaxTopan_GWRFighter.Utilities.Menus
 {
@@ -40,7 +41,12 @@ WELCOME TO GWR FIGHTER
                 new string[] { "Attack", "Equip Weapon", "Exit Game" },
                 new Dictionary<int, Action>
                 {
-                    { 1, () => _gameManager.Attack() },
+                    { 1, () => 
+                        {
+                            _gameManager.Attack();
+                            _gameManager.OpenMenu(GameplayMenu());
+                        } 
+                    },
                     { 2, () => _gameManager.OpenMenu(EquipmentMenu()) },
                     { 3, () =>
                         {
@@ -58,26 +64,39 @@ WELCOME TO GWR FIGHTER
         /// <returns></returns>
         public Menu EquipmentMenu()
         {
-            // TODO: Move this out of menu - not SOLID?
+            // TODO: Move this out of menumanager - not SOLID?
             List<IWeapon> weapons = _gameManager.Weapons;
+            string[] weaponNames = weapons.OrderBy(w => w.Name).Select(w => w.Name).ToArray();
+            
+            //TODO: figure out if I can make this linq or for loop work
+            /*
+            //Dictionary<int, Action> weaponChoices = weapons
+            //    .OrderBy(w => w.Name)
+            //    .Select((w, i) => new KeyValuePair<int, Action>(i + 1, () => { _gameManager.hero.EquipWeapon(w); _gameManager.OpenMenu(GameplayMenu()); }))
+            //    .ToDictionary<int, Action>(w => w.Key, a => a.Value);
 
-            string[] weaponNames = weapons.Select(w => w.Name).ToArray();
-            Dictionary<int, Action> choices = new Dictionary<int, Action>();
+            //Dictionary<int, Action> weaponChoices = new Dictionary<int, Action>();
 
-            for (int i = 0; i < weapons.Count; i++)
-            {
-                choices.Add(i + 1, () =>
-                {
-                    _gameManager.hero.EquipWeapon(weapons[i]);
-                    _gameManager.OpenMenu(GameplayMenu());
-                });
-            }
+            //for (int i = 0; i < weapons.Count; i++)
+            //{
+            //    weaponChoices.Add(i + 1, () =>
+            //    {
+            //        _gameManager.hero.EquipWeapon(weapons[i]);
+            //        _gameManager.OpenMenu(GameplayMenu());
+            //    });
+            //}
+            */
 
             return new Menu
             (
                 "Which item would you like to equip?",
                 weaponNames,
-                choices
+                new Dictionary<int, Action>
+                {
+                    { 1, () => {  _gameManager.hero.EquipWeapon(weapons[0]); _gameManager.OpenMenu(GameplayMenu()); }},
+                    { 2, () => {  _gameManager.hero.EquipWeapon(weapons[1]); _gameManager.OpenMenu(GameplayMenu()); }},
+                    { 3, () => {  _gameManager.hero.EquipWeapon(weapons[2]); _gameManager.OpenMenu(GameplayMenu()); }},
+                }
             );
         }
     }
