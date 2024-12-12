@@ -30,6 +30,9 @@ namespace MaxTopan_GWRFighter.Utilities.Menus
             return menu.GetChoice();
         }
 
+        /// <summary>
+        /// Displays the stats for the current Hero and Villain
+        /// </summary>
         public void DisplayStats()
         {
             if (_gameManager.Hero != null && _gameManager.Villain != null)

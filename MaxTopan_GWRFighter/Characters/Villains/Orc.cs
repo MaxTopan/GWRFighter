@@ -1,5 +1,8 @@
 ﻿namespace MaxTopan_GWRFighter.Characters.Villains
 {
+    /// <summary>
+    /// Villain that starts with armour, which reduces each time it's attacked
+    /// </summary>
     internal class Orc : Villain
     {
         public override string Name => "Orc";

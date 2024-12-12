@@ -1,5 +1,8 @@
 ﻿namespace MaxTopan_GWRFighter.Characters.Villains
 {
+    /// <summary>
+    /// Villain that gains Health and AttackPower each turn
+    /// </summary>
     internal class Nilbog : Villain
     {
         public override string Name => "Nilbog";

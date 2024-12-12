@@ -2,6 +2,9 @@
 
 namespace MaxTopan_GWRFighter.Characters.Villains
 {
+    /// <summary>
+    /// Villain with a chance to dodge
+    /// </summary>
     internal class Dragon : Villain, IRandomChance
     {
         public override string Name => "Dragon";
