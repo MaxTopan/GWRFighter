@@ -22,7 +22,7 @@ namespace MaxTopan_GWRFighter.Utilities
         public GameManager() 
         {
             WeaponHelper weaponHelper = new WeaponHelper();
-            Weapons = weaponHelper.GetAllWeapons();
+            Weapons = weaponHelper.InstantiateAllWeapons();
         }
 
         /// <summary>
