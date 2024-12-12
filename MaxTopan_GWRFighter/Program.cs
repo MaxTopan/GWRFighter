@@ -9,15 +9,15 @@ namespace MaxTopan_GWRFighter
         static void Main(string[] args)
         {
             GameManager gameManager = new GameManager();
-            MenuFactory menuFactory = new MenuFactory(gameManager);
+            MenuManager menuManager = new MenuManager(gameManager);
 
-            Menu mainMenu = menuFactory.MainMenu();
+            Menu mainMenu = menuManager.MainMenu();
 
-            mainMenu.Use();
+            gameManager.OpenMenu(mainMenu);
 
-            Hero hero = gameManager.CreateHero();
+            //Hero hero = gameManager.CreateHero();
 
-            Console.ReadLine();
+            //Console.ReadLine();
         }
     }
 }

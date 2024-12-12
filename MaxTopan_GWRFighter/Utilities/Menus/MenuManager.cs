@@ -2,11 +2,11 @@
 
 namespace MaxTopan_GWRFighter.Utilities.Menus
 {
-    internal class MenuFactory
+    internal class MenuManager
     {
         private readonly GameManager _gameManager;
 
-        public MenuFactory(GameManager gameManager)
+        public MenuManager(GameManager gameManager)
         {
             _gameManager = gameManager;
         }
@@ -21,7 +21,12 @@ WELCOME TO GWR FIGHTER
                 new string[] { "Start Game", "Exit Game" },
                 new Dictionary<int, Action>
                 {
-                    { 1, () => { _gameManager.InitialiseGame(); _gameManager.OpenSubMenu(GameplayMenu()); } },
+                    { 1, () => 
+                        { 
+                            _gameManager.InitialiseGame(); 
+                            _gameManager.OpenMenu(GameplayMenu());
+                        }
+                    },
                     { 2, () => _gameManager.CloseGame() }
                 }
             );
@@ -36,8 +41,13 @@ WELCOME TO GWR FIGHTER
                 new Dictionary<int, Action>
                 {
                     { 1, () => _gameManager.Attack() },
-                    { 2, () => _gameManager.EquipWeapon() },
-                    { 3, () => { Console.WriteLine("Quitting to main menu.\r\nPress enter to continue..."); Console.ReadLine(); _gameManager.CloseGame(); } }
+                    { 2, () => _gameManager.OpenMenu(EquipmentMenu()) },
+                    { 3, () =>
+                        {
+                            Console.WriteLine("Quitting to main menu.\r\nPress enter to continue...");
+                            Console.ReadLine(); _gameManager.OpenMenu(MainMenu());
+                        }
+                    }
                 }
             );
         }
@@ -48,6 +58,7 @@ WELCOME TO GWR FIGHTER
         /// <returns></returns>
         public Menu EquipmentMenu()
         {
+            // TODO: Move this out of menu - not SOLID?
             List<IWeapon> weapons = _gameManager.Weapons;
 
             string[] weaponNames = weapons.Select(w => w.Name).ToArray();
@@ -55,7 +66,11 @@ WELCOME TO GWR FIGHTER
 
             for (int i = 0; i < weapons.Count; i++)
             {
-                choices.Add(i + 1, () => _gameManager.hero.EquipWeapon(weapons[i]));
+                choices.Add(i + 1, () =>
+                {
+                    _gameManager.hero.EquipWeapon(weapons[i]);
+                    _gameManager.OpenMenu(GameplayMenu());
+                });
             }
 
             return new Menu

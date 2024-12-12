@@ -54,7 +54,7 @@
                 throw new Exception("Attempted to invoke invalid choice.");
             }
 
-
+            Console.Clear();
 
             Results[choice].Invoke();
         }
