@@ -11,7 +11,8 @@ namespace MaxTopan_GWRFighter.Models
         public abstract double Percentage { get; }
         public bool ChanceTrigger()
         {
-            return ((IRandomChance)this).ChanceTrigger();
+            Random r = new Random();
+            return r.NextDouble() < Percentage;
         }
     }
 }
