@@ -13,11 +13,14 @@ namespace MaxTopan_GWRFighter.Models
 
         public override int DamageAmount => 25;
 
+        /// <summary>
+        /// Percentage chance to either hit the Hero or the Villain
+        /// </summary>
         public override double Percentage => 0.5;
 
         public override void Use(Character hero, Character villain)
         {
-            if (((Utilities.IRandomChance)this).ChanceTrigger())
+            if (ChanceTrigger())
             {
                 Console.WriteLine($"Tails. Fate gets {hero.Name} for {DamageAmount}.");
                 hero.Damage(DamageAmount);
