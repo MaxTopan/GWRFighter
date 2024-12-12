@@ -21,6 +21,7 @@
         public virtual void Damage(int value)
         {
             Health -= value;
+            if (Health < 0) Health = 0;
         }
 
         /// <summary>
