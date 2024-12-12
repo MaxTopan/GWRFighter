@@ -14,7 +14,7 @@
             Random r = new Random();
             if (r.NextDouble() < dodgePercentage)
             {
-                Console.WriteLine($"{Name} dodged!");
+                Console.WriteLine($"{Name} dodged and took no damage!");
                 return;
             }
             base.Damage(value);

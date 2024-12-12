@@ -9,10 +9,10 @@ namespace MaxTopan_GWRFighter.Models
 
         public void Use(Character hero, Character villain)
         {
-            villain.Damage(DamageAmount);
-
             /* MOVE THIS TO SOMETHING THAT OWNS DIALGOUE DUE TO SRP */
             Console.WriteLine($"{hero.Name} slashes with the {Name} for {DamageAmount} damage!");
+            
+            villain.Damage(DamageAmount);
         }
     }
 }

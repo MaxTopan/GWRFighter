@@ -19,6 +19,7 @@
             if (_armourValue > 0)
             {
                 _armourValue--;
+                Console.WriteLine($"The {Name} blocked {_armourValue} of the damage due to its thick skin!");
             }
         }
 

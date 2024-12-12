@@ -20,11 +20,10 @@ namespace MaxTopan_GWRFighter.Models
                 /* MOVE THIS TO SOMETHING THAT OWNS DIALGOUE DUE TO SRP */
                 Console.WriteLine($"{hero.Name} cast a spell to heal for {HealAmount}!");
             }
-
-            villain.Damage(DamageAmount);
-
             /* MOVE THIS TO SOMETHING THAT OWNS DIALGOUE DUE TO SRP */
             Console.WriteLine($"{hero.Name} waves the {Name} for {DamageAmount} damage!");
+            
+            villain.Damage(DamageAmount);
         }
     }
 }

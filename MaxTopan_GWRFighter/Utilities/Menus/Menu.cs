@@ -42,7 +42,11 @@
             do
             {
                 Console.Write($"Please choose (1 - {Choices.Length}): ");
-            } while (int.TryParse(Console.ReadLine(), out choice) && 1 > choice || choice > Choices.Length);
+                if (int.TryParse(Console.ReadLine(), out choice) && 1 > choice || choice > Choices.Length)
+                {
+                    continue;
+                }
+            } while (1 > choice || choice > Choices.Length);
 
             return choice;
         }
