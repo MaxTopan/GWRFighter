@@ -15,7 +15,7 @@ namespace MaxTopan_GWRFighter.Utilities.Menus
         }
 
         /// <summary>
-        /// Opens a menu and awaits a choice to execute
+        /// Displays relevent information, opens a menu and awaits a choice to execute
         /// </summary>
         /// <param name="menu">The menu to be opened</param>
         public void OpenMenu(Menu menu)
@@ -33,11 +33,11 @@ namespace MaxTopan_GWRFighter.Utilities.Menus
             if (_gameManager.Hero != null && _gameManager.Villain != null)
             {
                 Console.WriteLine();
-                Console.WriteLine("=======================================");
+                Console.WriteLine("==============================================================================");
                 _gameManager.Hero.DisplayStats();
                 Console.WriteLine();
                 _gameManager.Villain.DisplayStats();
-                Console.WriteLine("=======================================");
+                Console.WriteLine("==============================================================================");
                 Console.WriteLine();
             }
         }

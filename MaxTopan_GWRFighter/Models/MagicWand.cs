@@ -18,7 +18,7 @@ namespace MaxTopan_GWRFighter.Models
             {
                 hero.Heal(HealAmount);
                 /* MOVE THIS TO SOMETHING THAT OWNS DIALGOUE DUE TO SRP */
-                Console.WriteLine($"{hero.Name} gets healed for {HealAmount}");
+                Console.WriteLine($"{hero.Name} cast a spell to heal for {HealAmount}!");
             }
 
             villain.Damage(DamageAmount);

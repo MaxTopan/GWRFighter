@@ -19,12 +19,13 @@ namespace MaxTopan_GWRFighter.Models
             if (ChanceTrigger())
             {
                 damage *= 4;
+                Console.WriteLine($"The {Name} hit a weak spot!");
             }
 
             villain.Damage(damage);
 
             /* MOVE THIS TO SOMETHING THAT OWNS DIALGOUE DUE TO SRP */
-            Console.WriteLine($"{hero.Name} slashes with the {Name} for {DamageAmount} damage!");
+            Console.WriteLine($"{hero.Name} shoots the {Name} for {damage} damage!");
         }
     }
 }
