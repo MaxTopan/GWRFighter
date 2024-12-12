@@ -1,4 +1,6 @@
-﻿using MaxTopan_GWRFighter.Models;
+﻿using MaxTopan_GWRFighter.Characters.Villains;
+using MaxTopan_GWRFighter.Characters;
+using MaxTopan_GWRFighter.Models;
 using System.Linq;
 
 namespace MaxTopan_GWRFighter.Utilities.Menus
@@ -10,6 +12,34 @@ namespace MaxTopan_GWRFighter.Utilities.Menus
         public MenuManager(GameManager gameManager)
         {
             _gameManager = gameManager;
+        }
+
+        /// <summary>
+        /// Opens a menu and awaits a choice to execute
+        /// </summary>
+        /// <param name="menu">The menu to be opened</param>
+        public void OpenMenu(Menu menu)
+        {
+            DisplayStats();
+            _gameManager.IsGameOver();
+
+            menu.DisplayChoices();
+            int choice = menu.GetChoice();
+            menu.InvokeResult(choice);
+        }
+
+        public void DisplayStats()
+        {
+            if (_gameManager.Hero != null && _gameManager.Villain != null)
+            {
+                Console.WriteLine();
+                Console.WriteLine("=======================================");
+                _gameManager.Hero.DisplayStats();
+                Console.WriteLine();
+                _gameManager.Villain.DisplayStats();
+                Console.WriteLine("=======================================");
+                Console.WriteLine();
+            }
         }
 
         public Menu MainMenu()
@@ -25,7 +55,7 @@ WELCOME TO GWR FIGHTER
                     { 1, () => 
                         { 
                             _gameManager.InitialiseGame(); 
-                            _gameManager.OpenMenu(GameplayMenu());
+                            OpenMenu(GameplayMenu());
                         }
                     },
                     { 2, () => _gameManager.CloseGame() }
@@ -44,14 +74,16 @@ WELCOME TO GWR FIGHTER
                     { 1, () => 
                         {
                             _gameManager.TakeTurn();
-                            _gameManager.OpenMenu(GameplayMenu());
+                            OpenMenu(GameplayMenu());
                         } 
                     },
-                    { 2, () => _gameManager.OpenMenu(EquipmentMenu()) },
+                    { 2, () => OpenMenu(EquipmentMenu()) },
                     { 3, () =>
                         {
                             Console.WriteLine("Quitting to main menu.\r\nPress enter to continue...");
-                            Console.ReadLine(); _gameManager.OpenMenu(MainMenu());
+                            Console.ReadLine();
+                            _gameManager.ClearGame();
+                            OpenMenu(MainMenu());
                         }
                     }
                 }
@@ -93,9 +125,9 @@ WELCOME TO GWR FIGHTER
                 weaponNames,
                 new Dictionary<int, Action>
                 {
-                    { 1, () => {  _gameManager.hero.EquipWeapon(weapons[0]); _gameManager.OpenMenu(GameplayMenu()); }},
-                    { 2, () => {  _gameManager.hero.EquipWeapon(weapons[1]); _gameManager.OpenMenu(GameplayMenu()); }},
-                    { 3, () => {  _gameManager.hero.EquipWeapon(weapons[2]); _gameManager.OpenMenu(GameplayMenu()); }},
+                    { 1, () => {  _gameManager.Hero.EquipWeapon(weapons[0]); OpenMenu(GameplayMenu()); }},
+                    { 2, () => {  _gameManager.Hero.EquipWeapon(weapons[1]); OpenMenu(GameplayMenu()); }},
+                    { 3, () => {  _gameManager.Hero.EquipWeapon(weapons[2]); OpenMenu(GameplayMenu()); }},
                 }
             );
         }

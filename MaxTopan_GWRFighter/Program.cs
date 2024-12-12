@@ -13,7 +13,7 @@ namespace MaxTopan_GWRFighter
 
             Menu mainMenu = menuManager.MainMenu();
 
-            gameManager.OpenMenu(mainMenu);
+            menuManager.OpenMenu(mainMenu);
 
             //Hero hero = gameManager.CreateHero();
 

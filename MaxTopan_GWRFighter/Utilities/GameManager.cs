@@ -10,8 +10,8 @@ namespace MaxTopan_GWRFighter.Utilities
     /// </summary>
     internal class GameManager
     {
-        public Hero hero { get; private set; }
-        public Villain villain { get; private set; }
+        public Hero Hero { get; private set; }
+        public Villain Villain { get; private set; }
         public List<IWeapon> Weapons { get; private set; }
         public List<Type> Villains { get; private set; }
 
@@ -24,30 +24,6 @@ namespace MaxTopan_GWRFighter.Utilities
             Villains = villainHelper.GetAllVillains();
         }
 
-        /// <summary>
-        /// Opens a menu and awaits a choice to execute
-        /// </summary>
-        /// <param name="menu">The menu to be opened</param>
-        public void OpenMenu(Menu menu)
-        {
-            DisplayStats();
-            IsGameOver();
-            
-            menu.DisplayChoices();
-            int choice = menu.GetChoice();
-            menu.InvokeResult(choice);
-        }
-
-        public void DisplayStats()
-        {
-            if (hero != null && villain != null)
-            {
-                Console.WriteLine();
-                hero.DisplayStats();
-                villain.DisplayStats();
-                Console.WriteLine();
-            }
-        }
 
         /// <summary>
         /// Gets a name from the user and creates a hero with that name
@@ -61,8 +37,8 @@ namespace MaxTopan_GWRFighter.Utilities
                 Console.Write("Please enter a name for your hero: ");
                 name = Console.ReadLine();
             }
-            hero = new Hero(name);
-            return hero;
+            Hero = new Hero(name);
+            return Hero;
         }
 
         /// <summary>
@@ -73,8 +49,8 @@ namespace MaxTopan_GWRFighter.Utilities
         {
             Random r = new Random();
             int index = r.Next(0, Villains.Count);
-            villain = (Villain)Activator.CreateInstance(Villains[index])!;
-            return villain;
+            Villain = (Villain)Activator.CreateInstance(Villains[index])!;
+            return Villain;
         }
 
         internal void InitialiseGame()
@@ -103,24 +79,24 @@ namespace MaxTopan_GWRFighter.Utilities
 
         internal void TakeTurn()
         {
-            hero.Attack(villain);
-            villain.TakeTurn(hero);
+            Hero.Attack(Villain);
+            Villain.TakeTurn(Hero);
         }
 
         internal bool IsGameOver()
         {
             // shouldn't be possible with current villains, but worth having as an edge case
-            if (hero?.Health <= 0 && villain?.Health <= 0)
+            if (Hero?.Health <= 0 && Villain?.Health <= 0)
             {
                 DrawGame();
                 return true;
             }
-            else if (hero?.Health <= 0)
+            else if (Hero?.Health <= 0)
             {
                 LoseGame();
                 return true;
             }
-            else if (villain?.Health <= 0)
+            else if (Villain?.Health <= 0)
             {
                 WinGame();
                 return true;
@@ -131,7 +107,7 @@ namespace MaxTopan_GWRFighter.Utilities
         private void DrawGame()
         {
             Console.WriteLine("Well it's not great news.");
-            Console.WriteLine($"{hero.Name} and {villain.Name} took each other out in a blaze of glory!");
+            Console.WriteLine($"{Hero.Name} and {Villain.Name} took each other out in a blaze of glory!");
             Console.WriteLine("Decide whether you consider this a victory.");
 
         }
@@ -139,17 +115,24 @@ namespace MaxTopan_GWRFighter.Utilities
         private void WinGame()
         {
             Console.WriteLine("Congratulations!!");
-            Console.WriteLine($"{hero.Name} slayed the {villain.Name} with {hero.Health} health left!");
-            Console.WriteLine("Press enter to close the game...");
+            Console.WriteLine($"{Hero.Name} slayed the {Villain.Name} with {Hero.Health} health left!");
             Console.ReadLine();
+            CloseGame();
         }
 
         private void LoseGame()
         {
             Console.WriteLine("Tough luck!");
-            Console.WriteLine($"{hero.Name} was slain by the {villain.Name} with {villain.Health} damage left to go!");
-            Console.WriteLine("Press enter to close the game...");
+            Console.WriteLine($"{Hero.Name} was slain by the {Villain.Name} with {Villain.Health} damage left to go!");
             Console.ReadLine();
+            CloseGame();
+        }
+
+        internal void ClearGame()
+        {
+            Hero = null;
+            Villain = null;
+            Console.Clear();
         }
     }
 }
