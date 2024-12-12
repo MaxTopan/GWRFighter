@@ -127,6 +127,7 @@ WELCOME TO GWR FIGHTER
                     { 1, () => {  _gameManager.Hero.EquipWeapon(weapons[0]); OpenMenu(GameplayMenu()); }},
                     { 2, () => {  _gameManager.Hero.EquipWeapon(weapons[1]); OpenMenu(GameplayMenu()); }},
                     { 3, () => {  _gameManager.Hero.EquipWeapon(weapons[2]); OpenMenu(GameplayMenu()); }},
+                    { 4, () => {  _gameManager.Hero.EquipWeapon(weapons[3]); OpenMenu(GameplayMenu()); }}
                 }
             );
         }
