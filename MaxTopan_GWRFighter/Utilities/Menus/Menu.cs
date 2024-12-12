@@ -15,16 +15,10 @@
         /// </summary>
         string[] Options { get; }
 
-        /// <summary>
-        /// Dictionary of option numbers and delegates for the behaviour resulting from choosing that option
-        /// </summary>
-        Dictionary<int, Action> Results { get; }
-
-        public Menu(string header, string[] options, Dictionary<int, Action> results)
+        public Menu(string header, string[] options)
         {
             Header = header;
             Options = options;
-            Results = results;
         }
 
 
@@ -55,25 +49,9 @@
                     continue;
                 }
             } while (1 > optionChoice || optionChoice > Options.Length);
-
-            return optionChoice;
-        }
-
-        /// <summary>
-        /// Invokes the behaviour of a chosen option
-        /// </summary>
-        /// <param name="optionChoice">Which option's behaviour to invoke</param>
-        /// <exception cref="Exception">Triggers on an attempt to invoke an option that doesn't exist</exception>
-        public void InvokeResult(int optionChoice)
-        {
-            if (!Results.ContainsKey(optionChoice))
-            {
-                throw new Exception("Attempted to invoke invalid choice.");
-            }
-
             Console.Clear();
-
-            Results[optionChoice].Invoke();
+            Console.WriteLine();
+            return optionChoice;
         }
     }
 }

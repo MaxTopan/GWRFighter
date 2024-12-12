@@ -8,24 +8,26 @@ namespace MaxTopan_GWRFighter.Utilities.Menus
     internal class MenuManager
     {
         private readonly GameManager _gameManager;
+        private List<Weapon> _weapons;
 
         public MenuManager(GameManager gameManager)
         {
             _gameManager = gameManager;
+            _weapons = _gameManager.Weapons.OrderBy(x => x.Name).ToList();
+
         }
 
         /// <summary>
         /// Displays relevent information, opens a menu and awaits a choice to execute
         /// </summary>
         /// <param name="menu">The menu to be opened</param>
-        public void OpenMenu(Menu menu)
+        public int RunMenu(Menu menu)
         {
             DisplayStats();
             _gameManager.IsGameOver();
 
             menu.DisplayChoices();
-            int choice = menu.GetChoice();
-            menu.InvokeResult(choice);
+            return menu.GetChoice();
         }
 
         public void DisplayStats()
@@ -49,18 +51,27 @@ namespace MaxTopan_GWRFighter.Utilities.Menus
                 @"======================
 WELCOME TO GWR FIGHTER
 ======================",
-                new string[] { "Start Game", "Exit Game" },
-                new Dictionary<int, Action>
-                {
-                    { 1, () =>
-                        {
-                            _gameManager.InitialiseGame();
-                            OpenMenu(GameplayMenu());
-                        }
-                    },
-                    { 2, () => _gameManager.CloseGame() }
-                }
+                new string[] { "Start Game", "Exit Game" }
             );
+        }
+
+        public void RunMainMenu()
+        {
+            Menu menu = MainMenu();
+            int choice = RunMenu(menu);
+
+            switch (choice)
+            {
+                case 1:
+                    _gameManager.InitialiseGame();
+                    RunGameplayMenu();
+                    break;
+                case 2:
+                    _gameManager.CloseGame();
+                    break;
+                default:
+                    throw new ArgumentException($"Invalid choice {choice} called");
+            }
         }
 
         public Menu GameplayMenu()
@@ -68,57 +79,57 @@ WELCOME TO GWR FIGHTER
             return new Menu
             (
                 "What will you do?",
-                new string[] { "Attack", "Equip Weapon", "Exit Game" },
-                new Dictionary<int, Action>
-                {
-                    { 1, () =>
-                        {
-                            _gameManager.TakeTurn();
-                            OpenMenu(GameplayMenu());
-                        }
-                    },
-                    { 2, () => OpenMenu(EquipmentMenu()) },
-                    { 3, () =>
-                        {
-                            Console.WriteLine("Quitting to main menu.\r\nPress enter to continue...");
-                            Console.ReadLine();
-                            _gameManager.ClearGame();
-                            OpenMenu(MainMenu());
-                        }
-                    }
-                }
+                new string[] { "Attack", "Equip Weapon", "Exit Game" }
             );
         }
 
+        public void RunGameplayMenu()
+        {
+            Menu menu = GameplayMenu();
+            int choice = RunMenu(menu);
+
+            switch (choice)
+            {
+                case 1:
+                    _gameManager.TakeTurn();
+                    RunGameplayMenu();
+                    break;
+                case 2:
+                    RunEquipmentMenu();
+                    break;
+                case 3:
+                    Console.WriteLine("Quitting to main menu.\r\nPress enter to continue...");
+                    Console.ReadLine();
+                    _gameManager.ClearGame();
+                    RunMainMenu();
+                    break;
+                default:
+                    throw new ArgumentException($"Invalid choice {choice} called");
+            }
+        }
+
         /// <summary>
-        /// Dynamically generate a list of all weapons
+        /// Dynamically generate Menu wih a list of all weapon names
         /// </summary>
-        /// <returns>Menu with an option to equip each weapon</returns>
+        /// <returns>Menu with an option for each weapon</returns>
         public Menu EquipmentMenu()
         {
-            // TODO: Move this out of menumanager - not SOLID?
-            List<Weapon> weapons = _gameManager.Weapons;
-
-            string[] weaponNames = weapons.OrderBy(w => w.Name).Select(w => w.Name).ToArray();
-            Dictionary<int, Action> weaponChoices = weapons
-                .Select((weapon, index) => new
-                {
-                    Key = index + 1,
-                    Action = (Action)(() =>
-                    {
-                        _gameManager.Hero.EquipWeapon(weapon);
-                        OpenMenu(GameplayMenu());
-                    })
-                })
-                .ToDictionary(x => x.Key, x => x.Action);
-
+            string[] weaponNames = _weapons.OrderBy(w => w.Name).Select(w => w.Name).ToArray();
 
             return new Menu
             (
                 "Which item would you like to equip?",
-                weaponNames,
-                weaponChoices
+                weaponNames
             );
+        }
+
+        public void RunEquipmentMenu()
+        {
+            Menu menu = EquipmentMenu();
+            int choice = RunMenu(menu);
+            _gameManager.Hero.EquipWeapon(_weapons[choice - 1]);
+            
+            RunGameplayMenu();
         }
     }
 }

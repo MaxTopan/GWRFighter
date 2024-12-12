@@ -10,11 +10,7 @@ namespace MaxTopan_GWRFighter
         {
             GameManager gameManager = new GameManager();
             MenuManager menuManager = new MenuManager(gameManager);
-
-            Menu mainMenu = menuManager.MainMenu();
-
-            // open the first menu
-            menuManager.OpenMenu(mainMenu);
+            menuManager.RunMainMenu();
         }
     }
 }
