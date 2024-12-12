@@ -24,7 +24,7 @@
 
         public override void DisplayStats()
         {
-            Console.WriteLine($"{Name} [Health: {Health}, Attack Power: {AttackPower}, Armour: {_armourValue}]\r\nDescription: {Description}");
+            Console.WriteLine($"{Name} [Health: {Health}, Attack Power: {AttackPower}, Armour: {_armourValue}]\r\n{Description}");
         }
     }
 }

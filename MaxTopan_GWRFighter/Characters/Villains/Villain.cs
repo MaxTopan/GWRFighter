@@ -20,7 +20,7 @@
 
         public override void DisplayStats()
         {
-            Console.WriteLine($"{Name} [Health: {Health}, Attack Power: {AttackPower}]\r\nDescription: {Description}");
+            Console.WriteLine($"{Name} [Health: {Health}, Attack Power: {AttackPower}]\r\n{Description}");
         }
     }
 }
