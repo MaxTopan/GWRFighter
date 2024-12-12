@@ -23,7 +23,7 @@ namespace MaxTopan_GWRFighter.Utilities
         /// <summary>
         /// List of instances of the games Weapons
         /// </summary>
-        public List<IWeapon> Weapons { get; private set; }
+        public List<Weapon> Weapons { get; private set; }
 
         /// <summary>
         /// List of the classes of Villain

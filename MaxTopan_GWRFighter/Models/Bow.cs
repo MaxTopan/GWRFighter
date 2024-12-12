@@ -19,7 +19,7 @@ namespace MaxTopan_GWRFighter.Models
         public override void Use(Character hero, Character villain)
         {
             int damage = DamageAmount;
-            if (ChanceTrigger())
+            if (((Utilities.IRandomChance)this).ChanceTrigger())
             {
                 damage *= 4;
                 Console.WriteLine($"The {Name} hit a weak spot!");

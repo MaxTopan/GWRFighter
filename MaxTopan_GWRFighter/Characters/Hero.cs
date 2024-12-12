@@ -6,7 +6,7 @@ namespace MaxTopan_GWRFighter.Characters
     {
         public override string Name { get; }
         public override int Health { get; protected set; } = 100;
-        public IWeapon? EquippedWeapon { get; private set; }
+        public Weapon? EquippedWeapon { get; private set; }
 
         public Hero(string name)
         {
@@ -14,7 +14,7 @@ namespace MaxTopan_GWRFighter.Characters
             EquippedWeapon = null;
         }
 
-        public void EquipWeapon(IWeapon weapon)
+        public void EquipWeapon(Weapon weapon)
         {
             EquippedWeapon = weapon;
             Console.WriteLine($"{Name} equipped the {weapon.Name}.");

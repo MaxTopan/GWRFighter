@@ -13,11 +13,11 @@ namespace MaxTopan_GWRFighter.Models
         /// </summary>
         public override double Percentage => 0.45;
 
-        public int HealAmount => 15;
+        private int HealAmount => 15;
 
         public override void Use(Character hero, Character villain)
         {
-            if (ChanceTrigger())
+            if (((Utilities.IRandomChance)this).ChanceTrigger())
             {
                 hero.Heal(HealAmount);
                 Console.WriteLine($"{hero.Name} cast a spell to heal for {HealAmount}!");

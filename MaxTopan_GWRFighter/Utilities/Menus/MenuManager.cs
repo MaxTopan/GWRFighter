@@ -97,7 +97,7 @@ WELCOME TO GWR FIGHTER
         public Menu EquipmentMenu()
         {
             // TODO: Move this out of menumanager - not SOLID?
-            List<IWeapon> weapons = _gameManager.Weapons;
+            List<Weapon> weapons = _gameManager.Weapons;
 
             string[] weaponNames = weapons.OrderBy(w => w.Name).Select(w => w.Name).ToArray();
             Dictionary<int, Action> weaponChoices = weapons
