@@ -1,10 +1,4 @@
-﻿using MaxTopan_GWRFighter.Characters;
-using MaxTopan_GWRFighter.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MaxTopan_GWRFighter.Models;
 
 namespace MaxTopan_GWRFighter.Utilities.Menus
 {

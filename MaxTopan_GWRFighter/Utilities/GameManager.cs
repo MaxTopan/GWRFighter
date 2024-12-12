@@ -2,11 +2,6 @@
 using MaxTopan_GWRFighter.Characters.Villains;
 using MaxTopan_GWRFighter.Models;
 using MaxTopan_GWRFighter.Utilities.Menus;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MaxTopan_GWRFighter.Utilities
 {
@@ -19,7 +14,7 @@ namespace MaxTopan_GWRFighter.Utilities
         public Villain villain { get; private set; }
         public List<IWeapon> Weapons { get; private set; }
 
-        public GameManager() 
+        public GameManager()
         {
             WeaponHelper weaponHelper = new WeaponHelper();
             Weapons = weaponHelper.InstantiateAllWeapons();
