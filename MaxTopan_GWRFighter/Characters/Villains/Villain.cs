@@ -14,7 +14,6 @@
         {
             hero.Damage(AttackPower);
 
-            /* TODO: MOVE TO SOMETHING THAT OWNS DIALOGUE DUE TO SRP */
             Console.WriteLine($"{Name} attacks {hero.Name} for {AttackPower} damage!");
         }
 

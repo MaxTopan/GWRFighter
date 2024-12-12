@@ -27,15 +27,6 @@
             Results = results;
         }
 
-        /// <summary>
-        /// Displays menu choices, awaits selection, and invokes result
-        /// </summary>
-        public void Use()
-        {
-            DisplayChoices();
-            int choice = GetChoice();
-            InvokeResult(choice);
-        }
 
         /// <summary>
         /// Iterate through the option text with option numbers for each choice and display it to the user

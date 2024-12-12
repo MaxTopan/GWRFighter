@@ -25,7 +25,6 @@ namespace MaxTopan_GWRFighter.Models
                 Console.WriteLine($"The {Name} hit a weak spot!");
             }
 
-            /* MOVE THIS TO SOMETHING THAT OWNS DIALGOUE DUE TO SRP */
             Console.WriteLine($"{hero.Name} shoots the {Name} for {damage} damage!");
 
             villain.Damage(damage);

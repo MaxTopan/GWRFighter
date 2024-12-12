@@ -15,7 +15,6 @@
             Heal(_healthGrowthRate);
             AttackPower += _attackGrowthRate;
 
-            /* TODO: MOVE TO SOMETHING THAT OWNS DIALOGUE */
             Console.WriteLine($"{Name} recovered {_healthGrowthRate} health.");
             Console.WriteLine($"{Name} gained {_attackGrowthRate} attack.");
         }

@@ -1,7 +1,4 @@
-﻿using MaxTopan_GWRFighter.Characters.Villains;
-using MaxTopan_GWRFighter.Characters;
-using MaxTopan_GWRFighter.Models;
-using System.Linq;
+﻿using MaxTopan_GWRFighter.Models;
 
 namespace MaxTopan_GWRFighter.Utilities.Menus
 {
@@ -101,7 +98,7 @@ WELCOME TO GWR FIGHTER
         {
             // TODO: Move this out of menumanager - not SOLID?
             List<IWeapon> weapons = _gameManager.Weapons;
-            
+
             string[] weaponNames = weapons.OrderBy(w => w.Name).Select(w => w.Name).ToArray();
             Dictionary<int, Action> weaponChoices = weapons
                 .Select((weapon, index) => new
