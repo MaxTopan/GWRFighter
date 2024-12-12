@@ -96,7 +96,7 @@ WELCOME TO GWR FIGHTER
         /// <summary>
         /// Dynamically generate a list of all weapons
         /// </summary>
-        /// <returns>Menu with an option for each weapon</returns>
+        /// <returns>Menu with an option to equip each weapon</returns>
         public Menu EquipmentMenu()
         {
             // TODO: Move this out of menumanager - not SOLID?
