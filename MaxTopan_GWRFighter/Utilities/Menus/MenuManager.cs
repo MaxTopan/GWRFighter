@@ -43,7 +43,7 @@ WELCOME TO GWR FIGHTER
                 {
                     { 1, () => 
                         {
-                            _gameManager.Attack();
+                            _gameManager.TakeTurn();
                             _gameManager.OpenMenu(GameplayMenu());
                         } 
                     },

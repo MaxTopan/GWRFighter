@@ -31,6 +31,8 @@ namespace MaxTopan_GWRFighter.Utilities
         public void OpenMenu(Menu menu)
         {
             DisplayStats();
+            IsGameOver();
+            
             menu.DisplayChoices();
             int choice = menu.GetChoice();
             menu.InvokeResult(choice);
@@ -99,10 +101,55 @@ namespace MaxTopan_GWRFighter.Utilities
             throw new NotImplementedException();
         }
 
-        internal void Attack()
+        internal void TakeTurn()
         {
             hero.Attack(villain);
             villain.TakeTurn(hero);
+        }
+
+        internal bool IsGameOver()
+        {
+            // shouldn't be possible with current villains, but worth having as an edge case
+            if (hero?.Health <= 0 && villain?.Health <= 0)
+            {
+                DrawGame();
+                return true;
+            }
+            else if (hero?.Health <= 0)
+            {
+                LoseGame();
+                return true;
+            }
+            else if (villain?.Health <= 0)
+            {
+                WinGame();
+                return true;
+            }
+            return false;
+        }
+
+        private void DrawGame()
+        {
+            Console.WriteLine("Well it's not great news.");
+            Console.WriteLine($"{hero.Name} and {villain.Name} took each other out in a blaze of glory!");
+            Console.WriteLine("Decide whether you consider this a victory.");
+
+        }
+
+        private void WinGame()
+        {
+            Console.WriteLine("Congratulations!!");
+            Console.WriteLine($"{hero.Name} slayed the {villain.Name} with {hero.Health} health left!");
+            Console.WriteLine("Press enter to close the game...");
+            Console.ReadLine();
+        }
+
+        private void LoseGame()
+        {
+            Console.WriteLine("Tough luck!");
+            Console.WriteLine($"{hero.Name} was slain by the {villain.Name} with {villain.Health} damage left to go!");
+            Console.WriteLine("Press enter to close the game...");
+            Console.ReadLine();
         }
     }
 }
