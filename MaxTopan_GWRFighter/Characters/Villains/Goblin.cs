@@ -8,10 +8,5 @@
         public override int Health { get; protected set; } = 30;
 
         public override int AttackPower { get; protected set; } = 5;
-
-        public override void TakeTurn(Character hero)
-        {
-            Attack(hero);
-        }
     }
 }
