@@ -13,22 +13,38 @@ namespace MaxTopan_GWRFighter.Utilities
         public Hero hero { get; private set; }
         public Villain villain { get; private set; }
         public List<IWeapon> Weapons { get; private set; }
+        public List<Type> Villains { get; private set; }
 
         public GameManager()
         {
             WeaponHelper weaponHelper = new WeaponHelper();
             Weapons = weaponHelper.InstantiateAllWeapons();
+
+            VillainHelper villainHelper = new VillainHelper();
+            Villains = villainHelper.GetAllVillains();
         }
 
         /// <summary>
         /// Opens a menu and awaits a choice to execute
         /// </summary>
-        /// <param name="subMenu">The menu to be opened</param>
-        public void OpenSubMenu(Menu subMenu)
+        /// <param name="menu">The menu to be opened</param>
+        public void OpenMenu(Menu menu)
         {
-            subMenu.DisplayChoices();
-            int choice = subMenu.GetChoice();
-            subMenu.InvokeResult(choice);
+            DisplayStats();
+            menu.DisplayChoices();
+            int choice = menu.GetChoice();
+            menu.InvokeResult(choice);
+        }
+
+        public void DisplayStats()
+        {
+            if (hero != null && villain != null)
+            {
+                Console.WriteLine();
+                hero.DisplayStats();
+                villain.DisplayStats();
+                Console.WriteLine();
+            }
         }
 
         /// <summary>
@@ -47,9 +63,16 @@ namespace MaxTopan_GWRFighter.Utilities
             return hero;
         }
 
+        /// <summary>
+        /// Create an instance of a random Villain
+        /// </summary>
+        /// <returns>The created Villain</returns>
         public Villain CreateVillain()
         {
-            throw new NotImplementedException();
+            Random r = new Random();
+            int index = r.Next(0, Villains.Count);
+            villain = (Villain)Activator.CreateInstance(Villains[index])!;
+            return villain;
         }
 
         internal void InitialiseGame()
