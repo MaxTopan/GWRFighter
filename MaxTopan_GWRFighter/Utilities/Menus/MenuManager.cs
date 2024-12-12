@@ -5,6 +5,9 @@ using System.Linq;
 
 namespace MaxTopan_GWRFighter.Utilities.Menus
 {
+    /// <summary>
+    /// Manages behaviour related to displaying and navigating menus and selecting choices
+    /// </summary>
     internal class MenuManager
     {
         private readonly GameManager _gameManager;
@@ -90,10 +93,6 @@ WELCOME TO GWR FIGHTER
             );
         }
 
-        /// <summary>
-        /// Dynamically generates a list of all weapons, allowing the user to select and equip one
-        /// </summary>
-        /// <returns></returns>
         public Menu EquipmentMenu()
         {
             // TODO: Move this out of menumanager - not SOLID?

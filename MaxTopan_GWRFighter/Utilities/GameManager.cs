@@ -6,13 +6,28 @@ using MaxTopan_GWRFighter.Utilities.Menus;
 namespace MaxTopan_GWRFighter.Utilities
 {
     /// <summary>
-    /// Contains methods for the running of the game logic
+    /// Manages behaviour for the running of the game logic
     /// </summary>
     internal class GameManager
     {
+        /// <summary>
+        /// The active instance of the player character
+        /// </summary>
         public Hero Hero { get; private set; }
+
+        /// <summary>
+        /// The active instance of the current Villain
+        /// </summary>
         public Villain Villain { get; private set; }
+
+        /// <summary>
+        /// List of instances of the games Weapons
+        /// </summary>
         public List<IWeapon> Weapons { get; private set; }
+
+        /// <summary>
+        /// List of the classes of Villain
+        /// </summary>
         public List<Type> Villains { get; private set; }
 
         public GameManager()
@@ -21,7 +36,7 @@ namespace MaxTopan_GWRFighter.Utilities
             Weapons = weaponHelper.InstantiateAllWeapons();
 
             VillainHelper villainHelper = new VillainHelper();
-            Villains = villainHelper.GetAllVillains();
+            Villains = villainHelper.GetAllVillainClasses();
         }
 
 
@@ -53,18 +68,28 @@ namespace MaxTopan_GWRFighter.Utilities
             return Villain;
         }
 
+        /// <summary>
+        /// Set up the Hero and Villain instances for this game
+        /// </summary>
         internal void InitialiseGame()
         {
             CreateHero();
             CreateVillain();
         }
 
-        internal void Options()
+        /// <summary>
+        /// Remove the active Hero and Villain instances, and clear the display
+        /// </summary>
+        internal void ClearGame()
         {
-            // TODO: implement persistant text vs clean text
-            throw new NotImplementedException();
+            Hero = null;
+            Villain = null;
+            Console.Clear();
         }
 
+        /// <summary>
+        /// Close the application
+        /// </summary>
         internal void CloseGame()
         {
             Console.WriteLine("Exiting Application. Press Enter to close...");
@@ -72,46 +97,50 @@ namespace MaxTopan_GWRFighter.Utilities
             Environment.Exit(0);
         }
 
-        internal void EquipWeapon()
-        {
-            throw new NotImplementedException();
-        }
-
+        /// <summary>
+        /// Make the hero attack, then make the current Villain take its turn
+        /// </summary>
         internal void TakeTurn()
         {
             Hero.Attack(Villain);
             Villain.TakeTurn(Hero);
         }
 
-        internal bool IsGameOver()
+        /// <summary>
+        /// Check whether either Character has hit 0 Health
+        /// </summary>
+        /// <returns></returns>
+        internal void IsGameOver()
         {
-            // shouldn't be possible with current villains, but worth having as an edge case
             if (Hero?.Health <= 0 && Villain?.Health <= 0)
             {
                 DrawGame();
-                return true;
             }
             else if (Hero?.Health <= 0)
             {
                 LoseGame();
-                return true;
             }
             else if (Villain?.Health <= 0)
             {
                 WinGame();
-                return true;
             }
-            return false;
         }
 
+        /// <summary>
+        /// Display draw message, and close the game
+        /// </summary>
         private void DrawGame()
         {
             Console.WriteLine("Well it's not great news.");
             Console.WriteLine($"{Hero.Name} and {Villain.Name} took each other out in a blaze of glory!");
             Console.WriteLine("Decide whether you consider this a victory.");
-
+            Console.ReadLine();
+            CloseGame();
         }
 
+        /// <summary>
+        /// Display win message, and close the game
+        /// </summary>
         private void WinGame()
         {
             Console.WriteLine("Congratulations!!");
@@ -120,19 +149,15 @@ namespace MaxTopan_GWRFighter.Utilities
             CloseGame();
         }
 
+        /// <summary>
+        /// Display lose message, and close the game
+        /// </summary>
         private void LoseGame()
         {
             Console.WriteLine("Tough luck!");
             Console.WriteLine($"{Hero.Name} was slain by the {Villain.Name} with {Villain.Health} damage left to go!");
             Console.ReadLine();
             CloseGame();
-        }
-
-        internal void ClearGame()
-        {
-            Hero = null;
-            Villain = null;
-            Console.Clear();
         }
     }
 }

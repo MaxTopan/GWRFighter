@@ -8,7 +8,10 @@ namespace MaxTopan_GWRFighter.Models
 
         public override int DamageAmount => 7;
 
-        public override double Percentage => 0.3;
+        /// <summary>
+        /// Percentage chance to heal Character using the wand
+        /// </summary>
+        public override double Percentage => 0.45;
 
         public int HealAmount => 15;
 
@@ -17,10 +20,10 @@ namespace MaxTopan_GWRFighter.Models
             if (ChanceTrigger())
             {
                 hero.Heal(HealAmount);
-                /* MOVE THIS TO SOMETHING THAT OWNS DIALGOUE DUE TO SRP */
+                /* TODO: MOVE THIS TO SOMETHING THAT OWNS DIALGOUE DUE TO SRP */
                 Console.WriteLine($"{hero.Name} cast a spell to heal for {HealAmount}!");
             }
-            /* MOVE THIS TO SOMETHING THAT OWNS DIALGOUE DUE TO SRP */
+            /* TODO: MOVE THIS TO SOMETHING THAT OWNS DIALGOUE DUE TO SRP */
             Console.WriteLine($"{hero.Name} waves the {Name} for {DamageAmount} damage!");
             
             villain.Damage(DamageAmount);

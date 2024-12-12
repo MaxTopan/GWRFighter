@@ -10,8 +10,9 @@ namespace MaxTopan_GWRFighter.Utilities
         /// Get all subclasses of Villain
         /// </summary>
         /// <returns>A list of all Villain subclasses</returns>
-        public List<Type> GetAllVillains()
+        public List<Type> GetAllVillainClasses()
         {
+            // only go though the reflection the first time this runs
             if (villains == null)
             {
                 villains = Assembly.GetExecutingAssembly()

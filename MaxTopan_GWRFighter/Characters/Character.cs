@@ -4,6 +4,7 @@
     {
         public abstract string Name { get; }
         public abstract int Health { get; protected set; }
+
         /// <summary>
         /// Add health to the character
         /// </summary>
@@ -28,6 +29,9 @@
         /// <param name="character">Character to attack</param>
         public abstract void Attack(Character character);
 
+        /// <summary>
+        /// Show all relevent information relating to Character
+        /// </summary>
         public abstract void DisplayStats();
     }
 }

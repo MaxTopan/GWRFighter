@@ -11,6 +11,9 @@ namespace MaxTopan_GWRFighter.Models
 
         public override int DamageAmount => 5;
 
+        /// <summary>
+        /// Percentage chance for Bow to crit
+        /// </summary>
         public override double Percentage => 0.2;
 
         public override void Use(Character hero, Character villain)

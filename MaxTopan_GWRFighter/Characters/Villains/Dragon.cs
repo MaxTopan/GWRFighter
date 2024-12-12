@@ -7,14 +7,15 @@
         public override int Health { get; protected set; } = 20;
         public override int AttackPower { get; protected set; } = 20;
 
-        private double dodgePercentage = 0.35;
+        // chance for Dragon to take no damage
+        private readonly double _dodgePercentage = 0.35;
 
         public override void Damage(int value)
         {
             Random r = new Random();
-            if (r.NextDouble() < dodgePercentage)
+            if (r.NextDouble() < _dodgePercentage)
             {
-                Console.WriteLine($"{Name} dodged and took no damage!");
+                Console.WriteLine($"The {Name} dodged and took no damage!");
                 return;
             }
             base.Damage(value);

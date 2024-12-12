@@ -1,15 +1,29 @@
 ﻿namespace MaxTopan_GWRFighter.Utilities.Menus
 {
+    /// <summary>
+    /// An interactive choice presentable to the user
+    /// </summary>
     public class Menu
     {
+        /// <summary>
+        /// Text to be displayed before presenting the choices
+        /// </summary>
         string Header { get; }
-        string[] Choices { get; }
+        
+        /// <summary>
+        /// Array of text for the options to be displayed to the user
+        /// </summary>
+        string[] Options { get; }
+
+        /// <summary>
+        /// Dictionary of option numbers and delegates for the behaviour resulting from choosing that option
+        /// </summary>
         Dictionary<int, Action> Results { get; }
 
-        public Menu(string header, string[] choices, Dictionary<int, Action> results)
+        public Menu(string header, string[] options, Dictionary<int, Action> results)
         {
             Header = header;
-            Choices = choices;
+            Options = options;
             Results = results;
         }
 
@@ -23,12 +37,15 @@
             InvokeResult(choice);
         }
 
+        /// <summary>
+        /// Iterate through the option text with option numbers for each choice and display it to the user
+        /// </summary>
         public void DisplayChoices()
         {
             Console.WriteLine(Header);
-            for (int i = 0; i < Choices.Length; i++)
+            for (int i = 0; i < Options.Length; i++)
             {
-                Console.WriteLine($"{i + 1}) {Choices[i]}");
+                Console.WriteLine($"{i + 1}) {Options[i]}");
             }
         }
 
@@ -38,29 +55,34 @@
         /// <returns>The validated chosen int</returns>
         public int GetChoice()
         {
-            int choice;
+            int optionChoice;
             do
             {
-                Console.Write($"Please choose (1 - {Choices.Length}): ");
-                if (int.TryParse(Console.ReadLine(), out choice) && 1 > choice || choice > Choices.Length)
+                Console.Write($"Please choose (1 - {Options.Length}): ");
+                if (int.TryParse(Console.ReadLine(), out optionChoice))
                 {
                     continue;
                 }
-            } while (1 > choice || choice > Choices.Length);
+            } while (1 > optionChoice || optionChoice > Options.Length);
 
-            return choice;
+            return optionChoice;
         }
 
-        public void InvokeResult(int choice)
+        /// <summary>
+        /// Invokes the behaviour of a chosen option
+        /// </summary>
+        /// <param name="optionChoice">Which option's behaviour to invoke</param>
+        /// <exception cref="Exception">Triggers on an attempt to invoke an option that doesn't exist</exception>
+        public void InvokeResult(int optionChoice)
         {
-            if (!Results.ContainsKey(choice))
+            if (!Results.ContainsKey(optionChoice))
             {
                 throw new Exception("Attempted to invoke invalid choice.");
             }
 
             Console.Clear();
 
-            Results[choice].Invoke();
+            Results[optionChoice].Invoke();
         }
     }
 }
