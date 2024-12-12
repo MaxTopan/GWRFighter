@@ -55,9 +55,9 @@ WELCOME TO GWR FIGHTER
                 new string[] { "Start Game", "Exit Game" },
                 new Dictionary<int, Action>
                 {
-                    { 1, () => 
-                        { 
-                            _gameManager.InitialiseGame(); 
+                    { 1, () =>
+                        {
+                            _gameManager.InitialiseGame();
                             OpenMenu(GameplayMenu());
                         }
                     },
@@ -74,11 +74,11 @@ WELCOME TO GWR FIGHTER
                 new string[] { "Attack", "Equip Weapon", "Exit Game" },
                 new Dictionary<int, Action>
                 {
-                    { 1, () => 
+                    { 1, () =>
                         {
                             _gameManager.TakeTurn();
                             OpenMenu(GameplayMenu());
-                        } 
+                        }
                     },
                     { 2, () => OpenMenu(EquipmentMenu()) },
                     { 3, () =>
@@ -93,42 +93,34 @@ WELCOME TO GWR FIGHTER
             );
         }
 
+        /// <summary>
+        /// Dynamically generate a list of all weapons
+        /// </summary>
+        /// <returns>Menu with an option for each weapon</returns>
         public Menu EquipmentMenu()
         {
             // TODO: Move this out of menumanager - not SOLID?
             List<IWeapon> weapons = _gameManager.Weapons;
-            string[] weaponNames = weapons.OrderBy(w => w.Name).Select(w => w.Name).ToArray();
             
-            //TODO: figure out if I can make this linq or for loop work
-            /*
-            //Dictionary<int, Action> weaponChoices = weapons
-            //    .OrderBy(w => w.Name)
-            //    .Select((w, i) => new KeyValuePair<int, Action>(i + 1, () => { _gameManager.hero.EquipWeapon(w); _gameManager.OpenMenu(GameplayMenu()); }))
-            //    .ToDictionary<int, Action>(w => w.Key, a => a.Value);
+            string[] weaponNames = weapons.OrderBy(w => w.Name).Select(w => w.Name).ToArray();
+            Dictionary<int, Action> weaponChoices = weapons
+                .Select((weapon, index) => new
+                {
+                    Key = index + 1,
+                    Action = (Action)(() =>
+                    {
+                        _gameManager.Hero.EquipWeapon(weapon);
+                        OpenMenu(GameplayMenu());
+                    })
+                })
+                .ToDictionary(x => x.Key, x => x.Action);
 
-            //Dictionary<int, Action> weaponChoices = new Dictionary<int, Action>();
-
-            //for (int i = 0; i < weapons.Count; i++)
-            //{
-            //    weaponChoices.Add(i + 1, () =>
-            //    {
-            //        _gameManager.hero.EquipWeapon(weapons[i]);
-            //        _gameManager.OpenMenu(GameplayMenu());
-            //    });
-            //}
-            */
 
             return new Menu
             (
                 "Which item would you like to equip?",
                 weaponNames,
-                new Dictionary<int, Action>
-                {
-                    { 1, () => {  _gameManager.Hero.EquipWeapon(weapons[0]); OpenMenu(GameplayMenu()); }},
-                    { 2, () => {  _gameManager.Hero.EquipWeapon(weapons[1]); OpenMenu(GameplayMenu()); }},
-                    { 3, () => {  _gameManager.Hero.EquipWeapon(weapons[2]); OpenMenu(GameplayMenu()); }},
-                    { 4, () => {  _gameManager.Hero.EquipWeapon(weapons[3]); OpenMenu(GameplayMenu()); }}
-                }
+                weaponChoices
             );
         }
     }
